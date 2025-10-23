@@ -9,25 +9,21 @@
     <div class="container mt-4">
         <h2>AI-Assisted Domain Modelling</h2>
         <p>Define your concept here(e.g., "a simple blog, university library")</p>
-
         <form method="POST">
             <div class="mb-3">
                 <textarea name="prompt" class="form-control" rows="3"></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Generate Model</button>
         </form>
-
         <hr>
         <h5>Successfully generated for {{ prompt_text }}</h5>
         <hr>
-
         {% if sql_schema %}
         <div class="row">
             <div class="col-md-6">
                 <h4>Generated SQL Schema:</h4>
                 <pre><code style="white-space: pre-wrap;">{{ sql_schema }}</code></pre>
             </div>
-
             <div class="col-md-6">
                 <h4>Generated ER Diagram:</h4>
                 <div class="mermaid">
@@ -36,7 +32,6 @@
             </div>
         </div>
         {% endif %}
-        <!-- 3. NEW: Static Analysis Report Card -->
 {% if static_report %}
 <div class="col-lg-4">
     <div class="card result-card shadow-sm h-100">
@@ -45,11 +40,7 @@
                 <i class="bi bi-shield-check me-2"></i>Static Analysis Report
             </h4>
             <div class="report-card-body flex-grow-1">
-                
-                <!-- Loop through each finding in the report -->
                 {% for finding in static_report %}
-                
-                    <!-- Set alert color based on finding type -->
                     {% set alert_class = 'alert-secondary' %}
                     {% if finding.type == 'success' %}
                         {% set alert_class = 'alert-success' %}
@@ -58,10 +49,8 @@
                     {% elif finding.type == 'error' %}
                         {% set alert_class = 'alert-danger' %}
                     {% endif %}
-                    
                     <div class="alert {{ alert_class }} p-2 mb-2">
                         <h6 class="alert-heading mb-0 fs-6">
-                            <!-- Add an icon based on type -->
                             {% if finding.type == 'success' %}
                                 <i class="bi bi-check-circle-fill me-1"></i> Success
                             {% elif finding.type == 'warning' %}
@@ -82,7 +71,6 @@
 </div>
 {% endif %}
     </div>
-
     <script type="module">
         import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
         mermaid.initialize({ startOnLoad: true });
